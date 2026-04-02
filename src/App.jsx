@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { useAuth } from "./context/AuthContext";
 import Login from "./pages/Login";
 import DashboardLayout from "./components/DashboardLayout";
 import { Toaster } from "sonner";
 import routes from "./route/SidebarRaoute";
+const LawyerProfile = lazy(() => import("./pages/LawyerProfile"));
 
 const LoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -41,6 +42,7 @@ function App() {
                 }
               />
             ))}
+            <Route path="/lawyers/:id/profile" element={<Suspense fallback={<LoadingSpinner />}><LawyerProfile /></Suspense>} />
             <Route path="*" element={<Navigate to="/lawyers" replace />} />
           </Route>
         ) : (

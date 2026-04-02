@@ -1,5 +1,11 @@
 import http from "./http";
 
+// Admin: Register new lawyer
+export const registerLawyer = async (lawyerData) => {
+  const { data } = await http.post(`/api/lawyers/register`, lawyerData);
+  return data;
+};
+
 // Admin: Get all lawyers
 export const getAllLawyers = async () => {
   const { data } = await http.get(`/api/lawyers/all`);
